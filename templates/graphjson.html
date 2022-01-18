@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> MyGreenGarden</title>
+
+    <!-- ========== Javasript and CSS files  ========= -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/Chart.min.js"></script>
+ 
+   
+  </head>
+
+  <body>
+
+    <!-- ========== Nav bar ========= -->
+    <div id="wrapper">
+      <div class="d-flex flex-column" id="content-wrapper">
+          <div id="content">
+              <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar">
+                  <div class="container-fluid">
+                    <!-- Titre -->   
+                    <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search" style="font-size: 32px;">
+                      <img src="static/images/greengarden.png"  style="width: 80px;height: 80px; margin:0px">
+                      MyGraphJSON
+                    </form>
+                    <!-- fin Titre --> 
+                  </div>
+              </nav>
+            </div>
+      </div>
+      <!-- ========== end Nav bar ========= -->
+		      
+      <div class="container-fluid">
+        <div class="title-wrapper pt-0"> 
+          
+          <!-- ========== Graphique 1 Températures et ventilation par Lucarne ========== -->
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card h-300">
+                <div class="card-header">
+                  <span><i class="bi bi-graph-up me-2"></i></span> Graph avec data au format JSON
+                </div>
+                <br />
+                <div class="chart">
+                  <canvas id="chart" style="width: 100%; height: 300px"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+    <!-- ======== main-wrapper end =========== -->
+
+    <script>
+        var jsonfile = {
+        "jsonarray": [{
+            "name": "Joe",
+            "age": 12
+        }, {
+            "name": "Tom",
+            "age": 14
+        }]
+        };
+
+        var labels = jsonfile.jsonarray.map(function(e) {
+        return e.name;
+        });
+        var data = jsonfile.jsonarray.map(function(e) {
+        return e.age;
+        });;
+
+        var config = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Graph Line',
+                data: data,
+                backgroundColor: 'rgba(0, 119, 204, 0.3)'
+            }]
+        }
+        };
+        
+
+    var ctx1 = document.getElementById("chart").getContext("2d");
+    var chart = new Chart(ctx1, {
+      type: "line", 
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "test json graph",
+            backgroundColor: "transparent",
+            borderColor: "#2F80ED",
+            data: data,
+            pointBackgroundColor: "transparent",
+            pointHoverBackgroundColor: "#2F80ED",
+            pointBorderColor: "transparent",
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 5,
+            pointBorderWidth: 5,
+            pointRadius: 8,
+            pointHoverRadius: 8,
+            order: 1,
+          },
+        ],
+      },
+
+      // Configuration options
+      options: {
+        tooltips: {
+          callbacks: {
+            labelColor: function (tooltipItem, chart) {
+              return {
+                backgroundColor: "#ffffff",
+              };
+            },
+          },
+          intersect: false,
+          backgroundColor: "#f9f9f9",
+          titleFontColor: "#8F92A1",
+          titleFontColor: "#8F92A1",
+          titleFontSize: 12,
+          bodyFontColor: "#171717",
+          bodyFontStyle: "bold",
+          bodyFontSize: 16,
+          multiKeyBackground: "transparent",
+          displayColors: false,
+          xPadding: 30,
+          yPadding: 10,
+          bodyAlign: "center",
+          titleAlign: "center",
+        },
+
+        title: {
+          display: false,
+        },
+        legend: {
+          display: false,
+        },
+
+        scales: {
+          yAxes: [
+            {
+              gridLines: {
+                display: false,
+                drawTicks: false,
+                drawBorder: false,
+              },
+              ticks: {
+                padding: 20,
+                max: 30,
+                min: -10,
+              },
+            },
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: false,
+                color: "rgba(143, 146, 161, .1)",
+                zeroLineColor: "rgba(143, 146, 161, .1)",
+              },
+              ticks: {
+                padding: 20,
+                maxTicksLimit:20,
+              },
+            },
+          ],
+        },
+      },
+    });
+
+    </script>
+   
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2022  ppdlab.ch  V1.0 </div>
+      <!-- Copyright -->
+    </footer>
+  </body>
+</html>
